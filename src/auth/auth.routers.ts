@@ -1,5 +1,5 @@
 import { NextFunction, Router, Request, Response } from "express";
-import { authService } from "./auth.service";
+import { authService } from "./auth.resolver";
 import { BadRequestError, currentUser } from "@shopping-app/cammon";
 
 const router = Router();

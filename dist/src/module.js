@@ -44,6 +44,7 @@ const cookie_session_1 = __importDefault(require("cookie-session"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const cammon_1 = require("@shopping-app/cammon");
 const auth_routers_1 = require("./auth/auth.routers");
+const seller_routers_1 = require("./seller/seller.routers");
 class AppModule {
     constructor(app) {
         this.app = app;
@@ -58,8 +59,6 @@ class AppModule {
             signed: false,
             secure: false
         }));
-        app.use(auth_routers_1.authRouters);
-        app.use(cammon_1.errorHandler);
         Object.setPrototypeOf(this, AppModule.prototype);
     }
     start() {
@@ -77,6 +76,10 @@ class AppModule {
                 throw new Error('database connection error');
             }
             const PORT = process.env.PORT || 8080;
+            this.app.use((0, cammon_1.currentUser)(process.env.JWT_KEY));
+            this.app.use(auth_routers_1.authRouters);
+            this.app.use(seller_routers_1.sellerRouters);
+            this.app.use(cammon_1.errorHandler);
             this.app.listen(PORT, () => console.log('OK! port: ' + PORT));
         });
     }

@@ -11,13 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authRouters = void 0;
 const express_1 = require("express");
-const auth_service_1 = require("./auth.service");
+const auth_resolver_1 = require("./auth.resolver");
 const cammon_1 = require("@shopping-app/cammon");
 const router = (0, express_1.Router)();
 exports.authRouters = router;
 router.post('/signup', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    const result = yield auth_service_1.authService.signup({ email, password });
+    const result = yield auth_resolver_1.authService.signup({ email, password });
     if (result.message)
         return next(new cammon_1.BadRequestError(result.message));
     req.session = { jwt: result.jwt };
@@ -25,7 +25,7 @@ router.post('/signup', (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 }));
 router.post('/signin', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    const result = yield auth_service_1.authService.signin({ email, password });
+    const result = yield auth_resolver_1.authService.signin({ email, password });
     if (result.message)
         return next(new cammon_1.BadRequestError(result.message));
     req.session = { jwt: result.jwt };

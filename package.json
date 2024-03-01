@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@shopping-app/cammon": "^1.0.22",
+    "@shopping-app/cammon": "^1.0.26",
     "@types/body-parser": "^1.19.5",
     "@types/cookie-session": "^2.0.48",
     "@types/cors": "^2.8.17",
